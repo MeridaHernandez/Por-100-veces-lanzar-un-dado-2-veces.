@@ -1,0 +1,57 @@
+#include <iostream>
+#include <time.h>
+#include <stdlib.h>
+using namespace std;
+
+/*Crear programa que usando la función del dado y la del histograma 
+que pintaba "n" asteriscos nos diga cuantas veces se repite cada suma 
+de la cara del lanzamiento de un dado 2 veces. Es decir, por 100 veces 
+vamos a repetir lanzar el dado 2 veces y sumaremos lo que cayo, lo único 
+que interesa es pintar con asteriscos cada posible valor de la suma de 
+los dos lanzamientos.*/
+
+void histograma(int v[], int t);
+int lanzarDados();
+int main()
+{
+	int v[11]={0};
+	int dado=0;
+	
+	srand(time(NULL));
+	
+	for(int i=0; i<100; i++)
+	{
+		dado = lanzarDados();
+		for(int j=0; j<11; j++)
+		{
+			if(dado == j+2)
+			{
+				v[j]++;
+			}
+		}		
+	}
+	histograma(v,11);
+	return 0;
+}
+
+int lanzarDados()
+{
+	int dado=0;
+	for(int i=0; i<2; i++)
+		dado+= 1+rand()%(6);
+		
+	return dado;
+}
+
+void histograma(int v[], int t)
+{
+	for(int i=0; i<t; i++)
+	{
+		cout<<"[" << i+2 <<"]" <<"=" << "\t";
+		for(int j=0; j<v[i]; j++)
+		{
+			cout<< "*";
+		}
+		cout<< endl;
+	}
+}
